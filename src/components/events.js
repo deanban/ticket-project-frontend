@@ -38,6 +38,7 @@ class Events {
     })
     if (filteredEvents.length === 0) {this.eventsNode.innerHTML = "There are no events in that state"}
       else {this.render(filteredEvents)}
+    if (!this.cart) {this.cart = new Cart()}
 
 
   }
@@ -96,13 +97,20 @@ class Events {
   }
 
     render(fe) {
-    this.eventsNode.innerHTML = `<div id="event-container"><form id="type-search-form">Search Events By Type:<select id="type-select"></select><input id="type-input" type="submit" value="Search"></form></div><ul>${fe.map( event => event.render() ).join('')}</ul>`
+    this.eventsNode.innerHTML = `<div id="event-container">
+                        <form id="type-search-form">Search Events By Type:
+                        <select id="type-select"></select>
+                        <input id="type-input" type="submit" value="Search">
+                        </form></div><ul>${fe.map( event => event.render()).join('')}</ul>`
+
+
     let box = document.getElementById('type-select')
     let list = this.events.map(e => e.event_type)
     this.select_box(list, box)
     let typeSearchForm = document.getElementById('type-search-form')
     typeSearchForm.addEventListener("submit", () => {event.preventDefault() 
       this.filterTypes()})
+    // debugger
   }
 
    filterTypes() {

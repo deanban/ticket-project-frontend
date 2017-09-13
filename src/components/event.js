@@ -9,6 +9,6 @@ class Event {
   }
 
   render() {
-    return `<li data-eventid='${this.id}' data-props='${JSON.stringify(this)}' class='event-element'>${this.name} $${this.price} <i data-action='delete-event' class="em em-scream_cat"></i></li>`
+    return `<li data-eventid='${this.id}' data-props='${JSON.stringify(this)}' class='event-element'>${this.name} $${this.price}<button id="add-cart">Add to cart</button></li>`
   }
 }
