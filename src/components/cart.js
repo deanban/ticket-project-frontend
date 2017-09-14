@@ -54,12 +54,14 @@ class Cart {
 		return a + b
 	}
 
+
 	renderCart(){
-		this.cartNode.innerHTML = `<h1>Your Cart</h1><div><h2>Your Total: $${this.total()} </h2></div>`
+		this.cartNode.style.backgroundColor = "#CCFFFF"
+		this.cartNode.innerHTML = `<h1 class="cart-header">Your Cart</h1><div><h2 class="cart-header">Your Total: $${this.total()} </h2></div>`
 
 		let value = `<div id="render-cart"><ul>` 
 		for (let i=0; i < (this.cart.length); i++) {
-			value += `<li>${this.cart[i].item} $${this.cart[i].price}<button data-action="delete-item" data-itemid="${this.cart[i].id}" class="delete-from-cart">X</button></li>`
+			value += `<li><h4>${this.cart[i].item} $${this.cart[i].price}<button data-action="delete-item" data-itemid="${this.cart[i].id}" class="delete-from-cart">Remove From Cart</button><h4></li>`
 		}
 		value += `</ul></div>`
 		this.cartNode.innerHTML += value 

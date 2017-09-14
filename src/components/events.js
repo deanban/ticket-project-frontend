@@ -98,10 +98,10 @@ class Events {
 
     render(fe) {
     this.eventsNode.innerHTML = `<div id="event-container">
-                        <form id="type-search-form">Search Events By Type:
+                        <form id="type-search-form"><h2>Search Events By Type:</h2>
                         <select id="type-select"></select>
                         <input id="type-input" type="submit" value="Search">
-                        </form></div><ul>${fe.map( event => event.render()).join('')}</ul>`
+                        </form></div><ul class="event-list"><h4>${fe.map( event => event.render()).join('')}</h4></ul>`
 
 
     let box = document.getElementById('type-select')
