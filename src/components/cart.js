@@ -14,14 +14,16 @@ class Cart {
 		this.addToCart()
 		this.cartElement = document.getElementById('render-cart')
 		// this.removeFromCart()
-		this.cartNode.addEventListener("click", event => {
-			let data = event.target.dataset
-			debugger
-			if(data.action === "delete-item") {
-				this.removeFromCart(this.cart, data.itemid)
-			}
+		// this.cartNode.addEventListener("click", event => {
+		// 	let data = event.target.dataset
+		// 	// debugger
+		// 	if(data.action === "delete-item") {
+		// 		this.removeFromCart(this.cart, parseInt(data.itemid))
+		// 		this.renderCart()
+		// 	}
 
-		})
+		// })
+		this.removeFromCart()
 	}
 
 	addToCart(){
@@ -39,12 +41,6 @@ class Cart {
 
 	}
 
-	removeFromCart(arr, targetId){
-		// event.target.parentElement.remove()
-		let index = arr.indexOf()
-		 = arr.splice((targetId - 1), 1)
-		this.renderCart()
-	}
 
 	total() {
 		let newarray = []
@@ -69,6 +65,26 @@ class Cart {
 		this.cartNode.innerHTML += value 
 	}
 
+	removeFromCart(arr){
+		// event.target.parentElement.remove()
+		// let index = arr.indexOf()
+		//  = arr.splice((targetId - 1), 1)
+		this.cartNode.addEventListener("click", event => {
+			let data = event.target.dataset
+			// debugger
+			if(data.action === "delete-item") {
+				// this.removeFromCart(this.cart, parseInt(data.itemid))
+				this.cart = this.cart.filter(function(item){
+				return item.id !== parseInt(data.itemid)
+				})
+			}
+				this.renderCart()
+
+		})
+		// debugger
+		// console.log(this.cart)
+		
+	}
 
 	cartItem(cartItem, itemPrice){
 		return{
