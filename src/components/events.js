@@ -14,6 +14,7 @@ class Events {
     // this.eventsForm.addEventListener('submit', this.createNewSearch.bind(this))
     this.eventsForm.addEventListener('submit', this.filterEvents.bind(this))
     // this.notesNode.addEventListener('click',this.handleDeleteNote.bind(this))
+    this.initMap()
   }
 
   fetchAndLoadEvents() {
@@ -44,36 +45,43 @@ class Events {
   }
 
 
-  // createNewSearch(arr) {
-  //        this.eventsNode.innerHTML += `<div id="event-container"><form id="event-search-form">Search Events By Type:<select id="select"></select><input type="submit" value="Search"></form></div>`
+  initMap(){
+    
+    this.eventsNode = document.getElementById('events-container')
 
-  // }
+    this.eventsNode.addEventListener('click', (event) =>{
+      
+        let data = event.target.dataset
 
-//   handleAddNote() {
-//     event.preventDefault()
-//     const body = this.noteInput.value
-//     this.adapter.createNote(body)
-//     .then( (noteJSON) => this.notes.push(new Note(noteJSON)) )
-//     .then(  this.render.bind(this) )
-//     .then( () => this.noteInput.value = '' )
-//   }
+        if(data.action === "show-map") {
 
-//   handleDeleteNote() {
-//     if (event.target.dataset.action === 'delete-note' && event.target.parentElement.classList.contains("note-element")) {
-//       const noteId = event.target.parentElement.dataset.noteid
-//       this.adapter.deleteNote(noteId)
-//       .then( resp => this.removeDeletedNote(resp) )
-//     }
-//   }
+          let latitude =JSON.parse(event.target.parentElement.dataset.props).lat          
+          let longitude = JSON.parse(event.target.parentElement.dataset.props).lng
+          
+          let location = this.location(latitude, longitude) 
+          // debugger
+          let map = new google.maps.Map(document.getElementById('maps'), {
+               zoom: 14,
+               center: location
+          })
+          let marker = new google.maps.Marker({
+            position: location,
+            map: map
+          })
+         
+    
+      }
 
-//   removeDeletedNote(deleteResponse) {
-//     this.notes = this.notes.filter( note => note.id !== deleteResponse.noteId )
-//     this.render()
-//   }
+    })
+  }
 
-  // eventsHTML() {
-  //   return this.events.map( event => event.render() ).join('')
-  // }
+
+  location(lattitude, longitude){
+    return {
+      lat: lattitude,
+      lng: longitude
+    }
+  }
 
 
 

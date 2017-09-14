@@ -57,6 +57,7 @@ class Cart {
 
 	renderCart(){
 		this.cartNode.style.backgroundColor = "#CCFFFF"
+		this.cartNode.style.border = "solid"
 		this.cartNode.innerHTML = `<h1 class="cart-header">Your Cart</h1><div><h2 class="cart-header">Your Total: $${this.total()} </h2></div>`
 
 		let value = `<div id="render-cart"><ul>` 

@@ -8,6 +8,12 @@
 body {
  background-color: #CCFFCC
 }    
+
+.design{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+}
 .navbar {
     list-style-type: none;
     margin: 0;
@@ -80,9 +86,10 @@ body {
     text-align: center;
   }
 
-
-
-
+  #maps {
+    height: 400px;
+    width: 100%;
+  }
 </style>
   
   </head>
@@ -100,8 +107,14 @@ body {
       <div id="events-container">
 
       </div>
+      <div class="design">
       <div id="cart-container">
         
+      </div>
+
+      <div id="maps">
+        
+      </div>
       </div>
     </div>
 
@@ -111,6 +124,10 @@ body {
     <script type="text/javascript" src="src/components/cart.js"></script>
     <script type="text/javascript" src="src/components/app.js"></script>
     <script type="text/javascript" src="src/index.js"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdRs3Yicd8W1CvEOjqBiaY3coZ7YcxIus">
+    </script>
+  
 
 
 
