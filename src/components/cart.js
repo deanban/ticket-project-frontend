@@ -10,6 +10,7 @@ class Cart {
 		this.eventsNode = document.getElementById('events-container')
 		this.addToCartButton = document.getElementById('add-cart')
 		this.cartNode = document.getElementById('cart-container')
+		// this.checkoutButton = document.getElementById('checkout')
 
 		this.addToCart()
 		this.cartElement = document.getElementById('render-cart')
@@ -24,6 +25,7 @@ class Cart {
 
 		// })
 		this.removeFromCart()
+		this.checkout()
 	}
 
 	addToCart(){
@@ -42,6 +44,8 @@ class Cart {
 	}
 
 
+
+
 	total() {
 		let newarray = []
 		for (let i = 0; i < this.cart.length; i++) {
@@ -58,14 +62,32 @@ class Cart {
 	renderCart(){
 		this.cartNode.style.backgroundColor = "#CCFFFF"
 		this.cartNode.style.border = "solid"
-		this.cartNode.innerHTML = `<h1 class="cart-header">Your Cart</h1><div><h2 class="cart-header">Your Total: $${this.total()} </h2></div>`
+		this.cartNode.innerHTML = `<span><h1 class="cart-header">Your Cart</h1></span><div><span><h2 class="cart-header">Your Total: $${this.total()} </h2></span></div>`
 
 		let value = `<div id="render-cart"><ul>` 
 		for (let i=0; i < (this.cart.length); i++) {
 			value += `<li><h4>${this.cart[i].item} $${this.cart[i].price}<button data-action="delete-item" data-itemid="${this.cart[i].id}" class="delete-from-cart">Remove From Cart</button><h4></li>`
 		}
-		value += `</ul></div>`
+		value += `</ul><div style="text-align:center;"><button id="checkout">Checkout</button></div></div>`
 		this.cartNode.innerHTML += value 
+
+	}
+
+		checkout() {
+		this.cartNode.addEventListener('click', (event) => {
+			if (event.target.id === "checkout") {
+				this.cartNode.innerHTML = `<div style="text-align:center"><h3>Your Total: $${this.total()}</h3> <form>First name:<input type='text' name='FirstName'><br>Last name: <input type='text' name='LastName'><br>Credit Card #: <input type='text' name='Credit Card No.'><br>Email: <input type='text' name='Email'></form><br></div><div style="text-align:center;"><button id="submit">Submit</button></div>`
+				this.cart.length = 0
+			}
+
+			if (event.target.id === "submit") {
+				this.cartNode.innerHTML = `<div style="text-align:center"><h3>Your Purchase Was Successful!</h3><br><h4>Check Your Email For Confirmation!</h4></div><div style="text-align:center;"><button id="continue-shopping">Continue Shopping</button></div>`
+			}
+
+			if (event.target.id === "continue-shopping") {
+				this.renderCart()
+			}
+		})
 	}
 
 	removeFromCart(arr){
@@ -80,8 +102,9 @@ class Cart {
 				this.cart = this.cart.filter(function(item){
 				return item.id !== parseInt(data.itemid)
 				})
-			}
 				this.renderCart()
+			}
+				
 
 		})
 		// debugger
